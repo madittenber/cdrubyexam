@@ -1,0 +1,43 @@
+
+<div class="spacer"></div>
+
+<table class="new">
+    <tr>
+    <td>Name</td><td><%= @user.firstName %> <%= @user.lastName %></td>
+    </tr>
+    <tr>
+    <td>EMail</td><td><%= @user.email %></td>
+    </tr>
+    <tr><td><a href="/users/<%= @user.id %>/edit">Edit</a></td></tr>
+</table>
+            
+
+<div class="spacer2"></div>
+
+<table>
+      <thead>
+        <tr>
+          <th class="song">Artist</th>
+          <th class="song">Title</th>
+          <th class="centered">Times Added</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @songs.all.each do |song| %>
+        <% if Playlist.where(user: @user).where(song: song).count > 0 %>
+          <tr>
+            <td><%= song.artist %></td>
+            <td><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
+            <td><%= Playlist.where(user: @user).where(song: song).count %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+
+
+</td>
+</tr>
+</table>
+

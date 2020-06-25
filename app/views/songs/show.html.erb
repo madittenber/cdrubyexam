@@ -1,0 +1,27 @@
+<div class="spacer"></div>
+
+
+
+
+<h1>Others who added <%= @song.title %> - <%= @song.artist %>:</h1>
+<div class="spacer2"></div>
+    <table>
+      <thead>
+        <tr>
+          <th class="song">Name</th>
+          <th class="song">Times Added</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <% if Playlist.find_by_song_id_and_user_id(@song.id, user.id) && user.id != session[:user_id] %>
+          <tr>
+            <td class="song"><a href="/users/<%= user.id %>/playlist"><%= user.firstName %> <%= user.lastName %></a></td>
+            <td class="centered"><%= Playlist.where(song: @song).where(user: user.id).count %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <a href="/songs">Back to Song List</a>

@@ -1,0 +1,23 @@
+<div class="spacer"></div>
+
+    <h1><%= @user.firstName %> <%= @user.lastName %>'s Playlist</h1>
+    <table>
+      <thead>
+        <tr>
+          <th class="song">Artist</th>
+          <th class="song">Title</th>
+          <th class="centered">Times Added</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @songs.all.each do |song| %>
+        <% if Playlist.where(user: @user).where(song: song).count > 0 %>
+          <tr>
+            <td><%= song.artist %></td>
+            <td><%= song.title %></td>
+            <td class="centered"><%= Playlist.where(user: @user).where(song: song).count %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>

@@ -1,0 +1,83 @@
+rails new [project_name]
+cd orm_practice
+
+add to gem file
+    gem 'sqlite3', '~> 1.3.13' 
+    gem 'hirb'
+    gem 'rails-footnotes', '>= 4.0.0', '<5'
+
+
+rails generate rails_footnotes:install
+
+bundle install
+
+rails server -b 0.0.0.0 or rails s -b 0.0.0.0
+
+rails g model User first_name:string last_name:string email:string password:string age:integer
+
+rake db:migrate
+rake db:migrate:status
+
+rails c   (reload when it doesnt work)
+Hirb.enable
+
+rails generate controller <ControllerName> Uppercase plural Students
+
+rake routes
+
+
+rails sql commands
+User.create(first_name:"Jon", last_name:"Stark", email:"jon@thewall.com", age:17)
+user.update(first_name: "James", last_name: "Doe", age: 40) 
+user.update(first_name: "James", last_name: "Doe"copy, age: 40) 
+user2 = User.last.delete
+
+
+Encryption model
+rails g model User name:string email:string password:digest
+class User < ApplicationRecord
+  has_secure_password
+end
+
+
+
+2.3.1 :007 > st = Student.first
+  Student Load (1.1ms)  SELECT  "students".* FROM "students"  ORDER BY "students"."id" ASC LIMIT 1
++----+------------+-----------+-------------------------+-------------------------+
+| id | first_name | last_name | created_at              | updated_at              |
++----+------------+-----------+-------------------------+-------------------------+
+| 1  | John       | Doe       | 2020-06-04 17:58:01 UTC | 2020-06-04 17:58:01 UTC |
++----+------------+-----------+-------------------------+-------------------------+
+1 row in set
+2.3.1 :008 > st.courses
+  Course Load (1.3ms)  SELECT "courses".* FROM "courses" INNER JOIN "signups" ON "courses"."id" = "signups"."course_id" WHERE "signups"."student_id" = ?  [["student_id", 1]]
+ => #<ActiveRecord::Associations::CollectionProxy []> 
+2.3.1 :009 > st.courses << Course.first
+
+
+
+rspec
+
+rails new <your_app_name> -T
+
+update Gem:
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
+
+bundle install
+rails generate rspec:install
+
+
+Models
+rails g model User firstName:string lastName:string email:string password:digest description:text type:string generic:string
+
+rails g model Song title:string artist:string
+
+rails g model Playlist user:references song:references
+
+
+Controllers
+rails g controller Users index show new create edit update destroy
+rails g controller Songs index new create edit update destroy

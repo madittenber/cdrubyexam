@@ -1,0 +1,53 @@
+<div class="spacer"></div>
+
+
+<table>
+<thead>
+<tr><th class="song">Artist</th>
+<th class="song">Song</th>
+<th>Times Added</th>
+<th></th>
+</tr>
+<thead>
+
+<tbody>
+<% @songs.each do |song| %>
+<tr><td class="song">
+  <%= song.artist %>
+</td>
+<td class="song">
+   <a href="/songs/<%= song.id %>"><%= song.title %> </a>
+</td>
+<td class="centered">
+  <%= Playlist.where(song: song).count %>
+</td>
+<td class="song"><% if current_user %>
+        <form action="/songs/<%= @current_user %>/playlist/<%= song.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="submit" value="Add">
+        </form>
+<% end %> 
+</td></tr>
+
+<% end %>
+</tbody>
+</table>
+
+<% if current_user %>
+<div class="spacer2"></div>
+
+<p>Add Song</p>
+<table>
+<form action="/songs/create" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<tr><td>Title:</td><td><input type="text" name="title" value=""></td></tr>
+<tr><td>Artist:</td><td><input type="text" name="artist" value=""></td></tr>
+<tr><td><input type="submit" value="Add"></td><td></td></tr>
+        </form>
+</table>
+        
+<% end %> 
+
+
+
+

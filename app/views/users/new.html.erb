@@ -1,0 +1,63 @@
+   <div class="container2">
+
+<div class="box">
+
+
+<p class="title">Register</p>
+<form action="/users/create" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<table>
+<tr>
+    <td>Email</td>
+    <td><input type="text" name="email" value=""></td>
+<tr>
+<tr>
+    <td>First Name</td>
+    <td><input type="text" name="firstName" value=""></td>
+<tr>
+<tr>
+    <td>Last Name</td>
+    <td><input type="text" name="lastName" value=""></td>
+<tr>
+
+<tr>
+    <td>Password</td>
+    <td><input type="password" name="password" required="required" class="text" value="" id="password"></td>
+<tr>
+<tr>
+    <td>Password Confirmation</td>
+    <td><input type="password" name="passwordConf" required="required" class="text" value="" id="password" oninput="check(this)"></td>
+<tr>
+<tr>
+    <td><input type="Submit" name="submit" value="Submit"></td>
+<tr>
+
+
+
+</table>
+</form>
+
+                <script language='javascript' type='text/javascript'>
+                    function check(input) {
+                        if (input.value != document.getElementById('password').value) {
+                            input.setCustomValidity('Password Must be Matching.');
+                        } else {
+                            // input is valid -- reset the error message
+                            input.setCustomValidity('');
+                        }
+                    }
+                </script>
+
+</div>
+    <div  class="box">
+    <p class="title">Login</p>
+    
+<form action="/sessions/create" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    Email: <input type="text" name="email" id="Email">
+    Password: <input type="password" name="password" id="Password">
+    <input type="Submit" value="Log In">
+</form>
+    </div>
+</div>
